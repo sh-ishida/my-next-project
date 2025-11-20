@@ -1,48 +1,10 @@
 import Image from "next/image";
+import { getMembersList } from "@/app/_libs/microcms";
+import { MEMBERS_LIST_LIMIT } from "../_constans";
 import styles from "./page.module.css";
 
-const data = {
-  contents: [
-    {
-      id: "1",
-      image: {
-        url: "/img-member1.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "デイビッド・チャン",
-      position: "CEO",
-      profile:
-        "デイビッド・チャンのプロフィールが入ります。デイビッド・チャンのプロフィールが入ります。デイビッド・チャンのプロフィールが入ります。デイビッド・チャンのプロフィールが入ります。デイビッド・チャンのプロフィールが入ります。",
-    },
-    {
-      id: "2",
-      image: {
-        url: "/img-member2.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "エミリー・サンダース",
-      position: "COO",
-      profile:
-        "エミリー・サンダースのプロフィールが入ります。エミリー・サンダースのプロフィールが入ります。エミリー・サンダースのプロフィールが入ります。エミリー・サンダースのプロフィールが入ります。エミリー・サンダースのプロフィールが入ります。",
-    },
-    {
-      id: "3",
-      image: {
-        url: "/img-member3.jpg",
-        width: 240,
-        height: 240,
-      },
-      name: "ジョン・ウィルソン",
-      position: "CTO",
-      profile:
-        "ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。ジョン・ウィルソンのプロフィールが入ります。",
-    },
-  ],
-};
-
-export default function Page(){
+export default async function Page(){
+  const data = await getMembersList({ limit: MEMBERS_LIST_LIMIT });
     return (
         <div className={styles.container}>
           {data.contents.length === 0 ? (

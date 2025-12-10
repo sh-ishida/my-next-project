@@ -1,19 +1,24 @@
 import { getNewsList } from "@/app/_libs/microcms";
-import NewsList from "@/app/_compornents/NewsList";
-import Pagination from "@/app/_compornents/Pagination";
-import SearchField from "@/app/_compornents/SearchField";
 import { NEWS_LIST_LIMIT } from "@/app/_constans";
+import NewsList from "@/app/_compornents/NewsList";
+import SearchField from "@/app/_compornents/SearchField";
 
-export default async function page() {
-    const { contents: news, totalCount } = await getNewsList({
+type Props = {
+    searchParams: {
+        q?: string;
+    };
+};
+
+export default async function Page({ searchParams }: Props) {
+    const { contents: news } = await getNewsList({
         limit: NEWS_LIST_LIMIT,
+        q: searchParams.q,
     });
 
     return (
         <>
             <SearchField />
             <NewsList news={news} />
-            <Pagination totalCount={totalCount} />
         </>
     );
 }
